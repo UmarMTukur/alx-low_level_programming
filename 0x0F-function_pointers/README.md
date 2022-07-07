@@ -7,4 +7,4 @@ Summary of what each file does
 3-op_unctions.c contains 5 functions that find the sum, differenc, product, diviosion and remainder of two numbers
 3-get_op_func.c contains the function that selects the correct function to perform the operation asked by the user
 3-calc.h contains all function prototypes and data structures used by the program
-100-main_opcodes.c prints the opcodes of its own main function
+100-main_opcodes.c prints the opcodes of its own main functio:
