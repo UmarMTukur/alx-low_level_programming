@@ -2,54 +2,43 @@
 #include <math.h>
 
 /**
-* min - returns the smallew of the step or max array limit
-* @step: the step
-* @size: the size of array
-*
-* Return: returns the smaller
-*/
-
-size_t min(size_t step, size_t size)
-{
-	if (step <= size)
-		return (step);
-	return (size);
-}
-
-
-/**
-* jump_search - searches by hopping
-* @array: the array passed
-* @size: the size of array
-* @value: the value we want to search
-*
-* Return: -1 is not found or the index of found
-*/
-
+ * jump_search - searches for a value in an array of
+ * integers using the Jump search algorithm
+ *
+ * @array: input array
+ * @size: size of the array
+ * @value: value to search in
+ * Return: index of the number
+ */
 int jump_search(int *array, size_t size, int value)
 {
-	size_t step;
-	size_t prev = 0;
+	int index, m, k, prev;
 
-	if (!array || size == 0)
+	if (array == NULL || size == 0)
 		return (-1);
-	step = sqrt(size);
-	while (array[prev] < value)
+
+	m = (int)sqrt((double)size);
+	k = 0;
+	prev = index = 0;
+
+	do {
+		printf("Value checked array[%d] = [%d]\n", index, array[index]);
+
+		if (array[index] == value)
+			return (index);
+		k++;
+		prev = index;
+		index = k * m;
+	} while (index < (int)size && array[index] < value);
+
+	printf("Value found between indexes [%d] and [%d]\n", prev, index);
+
+	for (; prev <= index && prev < (int)size; prev++)
 	{
-		printf("Value checked array[%lu] = [%d]\n", prev, array[prev]);
-		prev += step;
-		if (prev >= size)
-			break;
-	}
-	prev -= step;
-	printf("Value found between indexes [%lu] and [%lu]\n", prev, prev + step);
-	while (array[prev] <= value)
-	{
-		printf("Value checked array[%lu] = [%d]\n", prev, array[prev]);
+		printf("Value checked array[%d] = [%d]\n", prev, array[prev]);
 		if (array[prev] == value)
 			return (prev);
-		prev++;
-		if (prev == size)
-			return (-1);
 	}
+
 	return (-1);
+}
